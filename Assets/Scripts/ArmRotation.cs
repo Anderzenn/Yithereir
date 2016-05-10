@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ArmRotation : MonoBehaviour
+/*public class ArmRotation : MonoBehaviour
 {
 
     public bool right;
@@ -14,32 +14,37 @@ public class ArmRotation : MonoBehaviour
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         difference.Normalize();     //Normaling vector meaning the sum of xyz == 1, whilst keeping proportion
 
-        float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg; //Find the angle in degreesrotZ += (rotZ < 0) ? 360f : 0f;
+        float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg; //Find the angle in degrees
+        rotZ += (rotZ < 0) ? 0f : 360f;
 
         if (rotZ < -90 || rotZ > 90)
         {
             if (!right)
             {
-                transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+                rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+                //transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+                transform.eulerAngles = new Vector2(0, 180);
                 right = true;
-                Debug.Log(right);
+                //Debug.Log(right);
             }
-            transform.rotation = Quaternion.Euler(0f, 0f, rotZ - 180);
+            transform.rotation = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y, rotZ);
         }
         else if (rotZ > -90 || rotZ < 90)
         {
             if (right)
             {
-                transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+                rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+                //transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+                transform.eulerAngles = new Vector2(0, 0);
                 right = false;
-                Debug.Log(right);
+                //Debug.Log(right);
             }
-            transform.rotation = Quaternion.Euler(0f, 0f, rotZ);
+            transform.rotation = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y, rotZ);
         } 
     }
-}
+}*/
 
-/*public class ArmRotation : MonoBehaviour {
+public class ArmRotation : MonoBehaviour {
 
 	public int rotationOffset = 90;
     public Player player;
@@ -62,8 +67,6 @@ public class ArmRotation : MonoBehaviour
             rotationOffset = 0;
         }
 
-
-
 		// subtracting the position of the player from the mouse position
 		Vector3 difference = Camera.main.ScreenToWorldPoint (Input.mousePosition) - transform.position;
 		difference.Normalize ();		// normalizing the vector. Meaning that all the sum of the vector will be equal to 1
@@ -77,4 +80,4 @@ public class ArmRotation : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, rotationOffset, rotZ + rotationOffset);
         }
 	}
-}*/
+}

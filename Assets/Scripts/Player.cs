@@ -28,6 +28,37 @@ public class Player : MonoBehaviour {
     public Transform wallCheckPoint;
     public LayerMask wallLayerMask;
     public Color textColor;
+    public Transform tf;
+    public Camera cam;
+
+    public Transform handHold;
+    Vector3 dif;
+    float rotZ;
+    void FollowMouse()
+    {
+        // "handHold" is the arm
+        //dif = cam.ScreenToWorldPoint(Input.mousePosition) - handHold.position;
+        //dif.Normalize();
+        //if (dif.x > 0)
+        //    FaceRight();
+        //else if (dif.x < 0)
+        //    FaceLeft();
+        //handHold.rotation = Quaternion.Euler(0, 0, rotZ);
+    }
+    void FaceRight()
+    {
+        rotZ = Mathf.Atan2(dif.y, dif.x) * Mathf.Rad2Deg;
+        //Vector3 theScale = tf.localScale;
+        //theScale.x = 1;
+        //tf.localScale = theScale;
+    }
+    void FaceLeft()
+    {
+        rotZ = Mathf.Atan2(dif.y, -dif.x) * Mathf.Rad2Deg;
+        //Vector3 theScale = tf.localScale;
+        //theScale.x = -1;
+        //tf.localScale = theScale;
+    }
 
     void Awake()
     {
@@ -44,6 +75,8 @@ public class Player : MonoBehaviour {
 
     void Update()
     {
+        FollowMouse();
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             CombatTextManager.Instance.CreateText(transform.position, "Damage Number.", textColor);
@@ -56,22 +89,18 @@ public class Player : MonoBehaviour {
         {
             //transform.rotation = Quaternion.Euler(180, 0, 180);
             //transform.localScale = new Vector3(-1, 1, 1);
-            if (facingRight == true)
-            {
-                Flip();
-            }
-            facingRight = false;
+            //playerHand.transform.rotation = Quaternion.Euler(180, 0, 180);
+            //FaceLeft();
+            tf.eulerAngles = new Vector2(0, 180);
         }
 
         if (Input.GetAxis("Horizontal") > 0.1f)
         {
             //transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             //transform.localScale = new Vector3(1, 1, 1);
-            if (facingRight == false)
-            {
-                Flip();
-            }
-            facingRight = true;
+            //playerHand.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            //FaceRight();
+            tf.eulerAngles = new Vector2(0, 0);
         }
 
         if (Input.GetKeyDown(KeyCode.W) && !wallSliding)
@@ -202,15 +231,6 @@ public class Player : MonoBehaviour {
             gm.gNuggets += 1;
 
         }
-    }
-
-    void Flip()
-    {
-        facingRight = !facingRight;
-
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
     }
 
 }
