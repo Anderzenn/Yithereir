@@ -1,0 +1,34 @@
+[
+	{
+		"id": 0,
+		"title": "Torch",
+		"type": "Item",
+		"value": 2,
+		"stats": {
+			"power": 1,
+			"defence": 2,
+			"vitality": 1
+		},
+		"description": "This stick is on fire, it can be used as a light source.",
+		"stackable": true,
+		"rarity": 3,
+		"slug": "torch",
+		"color": "#FFE100"
+	},
+	{
+		"id": 1,
+		"title": "Pointy Rock",
+		"type": "Weapon",
+		"value": 2,
+		"stats": {
+			"power": 1,
+			"defence": 4,
+			"vitality": 2
+		},
+		"description": "This rock is pointy. Can be used as a weapon.",
+		"stackable": false,
+		"rarity": 1,
+		"slug": "door",
+		"color": "#1FE8F2"
+	}
+]
